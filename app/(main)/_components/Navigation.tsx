@@ -1,15 +1,23 @@
 "use client"
-import { ChevronLeft, MenuIcon, User2Icon, UserIcon } from 'lucide-react'
+import { ChevronLeft, MenuIcon, PlusCircle, Search, User2Icon, UserIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import React, { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { cn } from '@/lib/utils'
 import { UserItem } from './UserItem'
+import { useMutation } from 'convex/react'
+import { api } from '@/convex/_generated/api'
+import { Item } from './Item'
+import { Settings } from 'lucide-react'
+import { toast } from 'sonner'
+import { DocumentList } from './document-List'
 
 const Navigation = () => {
   const isResizing = useRef(false)
   const pathname=usePathname()
   const isMobile=useMediaQuery("(max-width:768px)")
+
+  const create=useMutation(api.documents.create)
   const sidebarRef=useRef<ElementRef<"aside">>(null)
   const navbarRef=useRef<ElementRef<"div">>(null)
   const [isResetting,setIsResetting]=useState(false);
@@ -86,6 +94,15 @@ const collapse =()=>{
   }
 }
 
+const handleCreate=()=>{
+  const promise=create({title:"Untitled"})
+  toast.promise(promise,{
+    loading:"Creating a new Page",
+    success:"New Page created successfully",
+    error:"Failed to create a page"
+  })
+}
+
   return (
     <>
     <aside ref={sidebarRef} className={cn(
@@ -99,9 +116,13 @@ const collapse =()=>{
     </div>
         <div>
             <UserItem/>
+            <Item title='Search' icon={Search} isSearch onClick={()=>{}}/>
+            <Item title='Settings' icon={Settings}  onClick={()=>{}}/>
+            <Item onClick={handleCreate} title="New Page"
+            icon={PlusCircle}/>
         </div>
         <div className='mt-4'>
-            <p>Documents</p>
+            <DocumentList/>
         </div>
          <div onMouseDown={handleMouseDown}
          onClick={resetWidth}

@@ -22,7 +22,7 @@ export const UserItem=()=>{
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <div role="button" className="flex items-center text-sm p-3 w-full hover:bg-primary/5 ">
+                <div role="button" className="flex items-center text-sm p-3 w-full hover:bg-primary/5">
                     <div className="gap-x-2 flex items-center max-w-[150px]">
                         <Avatar className="h-5 w-5 ">
                             <AvatarImage src={user?.imageUrl}/>
@@ -31,7 +31,7 @@ export const UserItem=()=>{
                             {user?.fullName}&apos;s Laydock
                         </span>
                     </div>
-                    <ChevronsLeftRight className="rotate-90 ml-2 text-muted-foreground h-4 w-4"/>
+                    <ChevronsLeftRight className="rotate-90 ml-2 text-muted-foreground h-4 w-4" />
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-80 " align="start" alignOffset={11} forceMount>
