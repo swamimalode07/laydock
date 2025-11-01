@@ -1,9 +1,10 @@
 "use client"
-import { ChevronLeft, MenuIcon } from 'lucide-react'
+import { ChevronLeft, MenuIcon, User2Icon, UserIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import React, { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { cn } from '@/lib/utils'
+import { UserItem } from './UserItem'
 
 const Navigation = () => {
   const isResizing = useRef(false)
@@ -97,7 +98,7 @@ const collapse =()=>{
       <ChevronLeft className='h-6 w-6'/>
     </div>
         <div>
-            <p>Action items</p>
+            <UserItem/>
         </div>
         <div className='mt-4'>
             <p>Documents</p>

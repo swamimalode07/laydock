@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "www.notion.com",
       },
+       {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+      },
     ],
   },
 };
