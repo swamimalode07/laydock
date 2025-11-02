@@ -27,6 +27,53 @@ export const getSidebar=query({
 })
 
 
+export const archive= mutation({
+    args:{
+        id:v.id("documents")
+    },
+    handler:async(ctx,args)=>{
+        const identity=await ctx.auth.getUserIdentity()
+        if(!identity){
+            throw new Error("Not authenticated")
+        }
+        const userId=identity.subject;
+
+        const existingDocument=await ctx.db.get(args.id)
+        if(!existingDocument){
+            throw new Error("not found");
+        }
+        if(existingDocument.userId !== userId){
+            throw new Error("Unautorized")
+        }
+
+        const recursiveArchived = async (documentId:Id<"documents">)=>{
+            const children=await ctx.db.query("documents")
+            .withIndex("by_user_parent",(q)=>(
+            q
+            .eq("userId",userId)
+            .eq("parentDocument",documentId)
+        ))
+        .collect();
+
+        for(const child of children){
+            await ctx.db.patch(child._id,{
+                isArchived:true
+            })
+
+            await recursiveArchived(child._id);
+        }
+        }
+
+        const document=await ctx.db.patch(args.id,{
+            isArchived:true
+        })
+
+        recursiveArchived(args.id)
+
+        return document;
+    }
+})
+
 export const create=mutation({
     args:{
         title:v.string(),
