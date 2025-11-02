@@ -26,7 +26,7 @@ interface ItemProps{
     level?:number;
     onExpand?:()=>void;
     title:string;
-    onClick:()=>void;
+    onClick?:()=>void;
     icon:LucideIcon;
 
 }

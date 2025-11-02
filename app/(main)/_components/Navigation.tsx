@@ -1,5 +1,5 @@
 "use client"
-import { ChevronLeft, MenuIcon, PlusCircle, Search, User2Icon, UserIcon } from 'lucide-react'
+import { ChevronLeft, MenuIcon, Plus, PlusCircle, Search, Trash, User2Icon, UserIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import React, { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
@@ -11,6 +11,12 @@ import { Item } from './Item'
 import { Settings } from 'lucide-react'
 import { toast } from 'sonner'
 import { DocumentList } from './document-List'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { TrashBox } from './trash-box'
 
 const Navigation = () => {
   const isResizing = useRef(false)
@@ -123,6 +129,22 @@ const handleCreate=()=>{
         </div>
         <div className='mt-4'>
             <DocumentList/>
+            <Item 
+            onClick={handleCreate} 
+            icon={Plus}
+            title="Add page"
+            />
+            <Popover>
+              <PopoverTrigger className='w-full mt-4 '>
+                <Item title="Trash" icon={Trash}/>
+              </PopoverTrigger>
+              <PopoverContent 
+              side={isMobile ? "bottom" : "right"}
+              className='p-0 w-72'
+              > 
+              <TrashBox/>
+              </PopoverContent>
+            </Popover>
         </div>
          <div onMouseDown={handleMouseDown}
          onClick={resetWidth}
