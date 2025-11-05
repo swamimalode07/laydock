@@ -6,13 +6,15 @@ import { useScrollTop } from "@/hooks/use-scroll-top";
 import { cn } from "@/lib/utils";
 import { SignInButton, UserButton, SignedOut, SignedIn } from "@clerk/nextjs";
 import { useConvexAuth } from "convex/react";
-import { Space_Grotesk } from "next/font/google";
 import { Spinner } from "@/components/spinner";
 import Link from "next/link";
+import Image from "next/image";
+import { Instrument_Serif } from "next/font/google";
 
-const font = Space_Grotesk({
+const font = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: "400",
+  variable: "--font-instrument-serif",
 });
 
 const Navbar = () => {
@@ -22,21 +24,21 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "z-50 fixed top-0 w-full backdrop-blur-md bg-background/80 dark:bg-[#1f1f1f]/80 transition-all duration-300",
+        "z-50 fixed top-0 w-full  transition-all duration-300",
         scrolled && "border-b shadow-sm"
       )}
     >
       <div className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
         <div className="flex items-center gap-x-2">
-          <span className="text-2xl animate-spin-slow">🌀</span>
-          <p
-            className={cn(
-              "text-2xl font-semibold tracking-tight select-none",
-              font.className
-            )}
-          >
-            Laydock
-          </p>
+          <Image
+            src="/image.png"
+            alt="Laydock Logo"
+            width={32}
+            height={32}
+            className="rounded-md"
+          />
+         <p
+          className={cn("text-2xl select-none text-black" ,font.className)}>ZeroPage</p>
         </div>
 
         <div className="flex items-center gap-x-4">
