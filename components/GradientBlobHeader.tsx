@@ -3,7 +3,7 @@ import React from "react";
 
 export default function GradientBlobHeader({ children }:any) {
   return (
-    <div className="relative w-full h-screen bg-white overflow-hidden">
+    <div className="relative w-full h-screen bg-white ">
       {/* Gradient blobs */}
       <div className="absolute inset-0 flex justify-center items-start">
         <div

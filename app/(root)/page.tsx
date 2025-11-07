@@ -2,6 +2,9 @@
 import Heading from "./_components/heading";
 import Hero from "./_components/hero";
 import Footer from "./_components/footer";
+import Video from 'next-video';
+import demovideo from "@/videos/demo-video.mp4"
+ 
 export default function Home() {
   return (
     <div className="min-h-full flex flex-col">
