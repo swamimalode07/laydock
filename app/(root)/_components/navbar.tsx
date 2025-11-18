@@ -26,7 +26,7 @@ const Navbar = () => {
     <nav
   className={cn(
     "z-50 fixed top-4 left-1/2 -translate-x-1/2 transition-all duration-500 ease-in-out rounded-2xl",
-    scrolled ? "opacity-0 : pointer-events-none"
+    scrolled ? "opacity-0 pointer-events-none" :"flex justify-between"
   )}
 >
       <div className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
