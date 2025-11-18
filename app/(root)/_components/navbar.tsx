@@ -20,17 +20,21 @@ const font = Instrument_Serif({
 
 const Navbar = () => {
   const scrolled = useScrollTop();
-  const { isAuthenticated, isLoading } = useConvexAuth();
+  const { isLoading } = useConvexAuth();
 
   return (
     <nav
-  className={cn(
-    "z-50 fixed top-4 left-1/2 -translate-x-1/2 transition-all duration-500 ease-in-out rounded-2xl",
-    scrolled ? "opacity-0 pointer-events-none" :"flex justify-between"
-  )}
->
-      <div className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
-        <div className="flex items-center gap-x-2">
+      className={cn(
+        "fixed top-0 w-full z-50 transition-all duration-300",
+        scrolled
+          ? "hidden"
+          : ""
+      )}
+    >
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+
+        {/* LEFT — Logo + Name */}
+        <div className="flex items-center gap-2">
           <Image
             src="/image.png"
             alt="Laydock Logo"
@@ -38,34 +42,43 @@ const Navbar = () => {
             height={32}
             className="rounded-md"
           />
-         <p
-          className={cn("text-2xl select-none text-black" ,font.className)}>ZeroPage</p>
+
+          <p className={cn("text-2xl select-none", font.className)}>
+            ZeroPage
+          </p>
         </div>
 
-        <div className="flex items-center gap-x-4">
+        {/* RIGHT — Auth Buttons + Toggle */}
+        <div className="flex items-center gap-4">
+
           {isLoading && <Spinner />}
 
           <SignedOut>
             {!isLoading && (
-              <>
-                <SignInButton mode="modal">
-                  <Button icon={LogIn} title="Log in" className="font-light"></Button>
-                </SignInButton>
-              </>
+              <SignInButton mode="modal">
+                <Button
+                  icon={LogIn}
+                  title="Log in"
+                  className="font-light"
+                />
+              </SignInButton>
             )}
           </SignedOut>
 
           <SignedIn>
             {!isLoading && (
               <>
-                <Button asChild>
-                  <Link href="/documents">Enter Zeropage</Link>
+                <Button >
+                  <Link href="/documents">
+                  <span>Enter Zeropage</span>
+                  </Link>
                 </Button>
                 <UserButton afterSignOutUrl="/" />
               </>
             )}
           </SignedIn>
 
+          {/* <ModeToggle /> */}
         </div>
       </div>
     </nav>

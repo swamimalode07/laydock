@@ -17,12 +17,15 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { TrashBox } from './trash-box'
+import { useSearch } from '@/hooks/use-search'
+import { useSettings } from '@/hooks/use-settings'
 
 const Navigation = () => {
   const isResizing = useRef(false)
   const pathname=usePathname()
   const isMobile=useMediaQuery("(max-width:768px)")
-
+  const search=useSearch()
+  const settings=useSettings()
   const create=useMutation(api.documents.create)
   const sidebarRef=useRef<ElementRef<"aside">>(null)
   const navbarRef=useRef<ElementRef<"div">>(null)
@@ -122,8 +125,8 @@ const handleCreate=()=>{
     </div>
         <div>
             <UserItem/>
-            <Item title='Search' icon={Search} isSearch onClick={()=>{}}/>
-            <Item title='Settings' icon={Settings}  onClick={()=>{}}/>
+            <Item title='Search' icon={Search} isSearch onClick={search.onOpen}/>
+            <Item title='Settings' icon={Settings}  onClick={settings.onOpen}/>
             <Item onClick={handleCreate} title="New Page"
             icon={PlusCircle}/>
         </div>

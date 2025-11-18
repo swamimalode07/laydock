@@ -46,12 +46,12 @@ const Heading = () => {
       )}
 
       <SignedIn>
-        <Button asChild variant="secondary" className="mt-6">
-          <Link href="/documents">
-            Try this site
-            <ArrowRight className="h-4 w-4 ml-2" />
-          </Link>
-        </Button>
+        <Link href="/documents">
+  <Button variant="secondary" className="mt-6">
+    Try this site <ArrowRight className="h-4 w-4 ml-2" />
+  </Button>
+</Link>
+
       </SignedIn>
 
       <SignedOut>
